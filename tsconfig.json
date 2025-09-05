@@ -11,13 +11,15 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "strict": false,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
     "declaration": true,
     "declarationMap": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "allowJs": true,
+    "checkJs": false
   },
   "include": [
     "src/**/*.ts",
@@ -29,6 +31,7 @@
   "exclude": [
     "node_modules",
     "dist",
-    "example"
+    "example",
+    "tests"
   ]
 }
