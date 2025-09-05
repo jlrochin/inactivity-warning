@@ -29,16 +29,5 @@ module.exports = {
         requireConfigFile: false,
       },
     },
-    {
-      files: ['*.ts', '*.tsx'],
-      extends: [
-        '@typescript-eslint/recommended',
-      ],
-      parser: '@typescript-eslint/parser',
-      parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
-      },
-    },
   ],
 };
