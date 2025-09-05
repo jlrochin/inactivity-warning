@@ -34,15 +34,14 @@ module.exports = {
       parser: '@typescript-eslint/parser',
       extends: [
         'eslint:recommended',
-        '@typescript-eslint/recommended',
       ],
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
       },
       rules: {
+        'no-unused-vars': 'off',
         '@typescript-eslint/no-unused-vars': 'warn',
-        '@typescript-eslint/no-explicit-any': 'off',
       },
     },
   ],
