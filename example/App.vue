@@ -529,7 +529,6 @@ timer.start()
           </div>
         </div>
       </div>
-      </div>
     </main>
 
     <!-- Modal de Advertencia -->
