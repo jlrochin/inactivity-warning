@@ -1,0 +1,63 @@
+{
+  "name": "inactivity-warning",
+  "version": "1.0.0",
+  "description": "Multi-framework inactivity warning component for Vue 3, React, Angular and Vanilla JavaScript",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "preview": "vite preview",
+    "test": "vitest",
+    "lint": "eslint src --ext .vue,.js,.ts",
+    "type-check": "vue-tsc --noEmit"
+  },
+  "keywords": [
+    "vue",
+    "vue3",
+    "react",
+    "angular",
+    "vanilla",
+    "javascript",
+    "inactivity",
+    "session",
+    "timeout",
+    "warning",
+    "modal",
+    "composable",
+    "hook",
+    "service",
+    "typescript",
+    "multi-framework"
+  ],
+  "author": "jlrupton <jlrupton@example.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jlrupton/inactivity-warning.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jlrupton/inactivity-warning/issues"
+  },
+  "homepage": "https://github.com/jlrupton/inactivity-warning#readme",
+  "peerDependencies": {
+    "vue": "^3.0.0 || ^2.0.0",
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "@angular/core": "^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.5.0",
+    "vite": "^5.0.0",
+    "vue": "^3.3.0"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

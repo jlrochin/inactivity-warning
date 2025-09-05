@@ -1,0 +1,180 @@
+/* Estilos base para React Inactivity Warning */
+.react-inactivity-warning-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.react-inactivity-warning-modal {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  padding: 2rem;
+  max-width: 28rem;
+  width: 100%;
+  margin: 1rem;
+  animation: slideIn 0.3s ease-out;
+}
+
+.react-inactivity-warning-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.react-inactivity-warning-icon {
+  background-color: #fef3c7;
+  padding: 0.75rem;
+  border-radius: 50%;
+}
+
+.react-inactivity-warning-icon-svg {
+  width: 2rem;
+  height: 2rem;
+  color: #d97706;
+}
+
+.react-inactivity-warning-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #111827;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.react-inactivity-warning-message {
+  color: #6b7280;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.react-inactivity-warning-countdown {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.react-inactivity-warning-countdown-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 5rem;
+  height: 5rem;
+  background-color: #fee2e2;
+  border-radius: 50%;
+}
+
+.react-inactivity-warning-countdown-text {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #dc2626;
+}
+
+.react-inactivity-warning-instruction {
+  font-size: 0.875rem;
+  color: #6b7280;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.react-inactivity-warning-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+}
+
+.react-inactivity-warning-button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.react-inactivity-warning-button-primary {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.react-inactivity-warning-button-primary:hover {
+  background-color: #2563eb;
+}
+
+.react-inactivity-warning-button-secondary {
+  background-color: #6b7280;
+  color: white;
+}
+
+.react-inactivity-warning-button-secondary:hover {
+  background-color: #4b5563;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Tema oscuro */
+.react-inactivity-warning-theme-dark .react-inactivity-warning-modal {
+  background-color: #1f2937;
+  color: #f9fafb;
+}
+
+.react-inactivity-warning-theme-dark .react-inactivity-warning-title {
+  color: #f9fafb;
+}
+
+.react-inactivity-warning-theme-dark .react-inactivity-warning-message,
+.react-inactivity-warning-theme-dark .react-inactivity-warning-instruction {
+  color: #d1d5db;
+}
+
+/* Tema minimal */
+.react-inactivity-warning-theme-minimal .react-inactivity-warning-modal {
+  background-color: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.react-inactivity-warning-theme-minimal .react-inactivity-warning-icon {
+  background-color: #f3f4f6;
+}
+
+.react-inactivity-warning-theme-minimal .react-inactivity-warning-icon-svg {
+  color: #6b7280;
+}
+
+.react-inactivity-warning-theme-minimal
+  .react-inactivity-warning-countdown-circle {
+  background-color: #f3f4f6;
+}
+
+.react-inactivity-warning-theme-minimal
+  .react-inactivity-warning-countdown-text {
+  color: #374151;
+}
