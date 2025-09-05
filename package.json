@@ -1,6 +1,6 @@
 {
   "name": "inactivity-warning",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Multi-framework inactivity warning component for Vue 3, React, Angular and Vanilla JavaScript",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
