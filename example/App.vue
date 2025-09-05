@@ -202,6 +202,7 @@
           </div>
         </div>
       </div>
+      </div>
 
       <!-- Documentation View -->
       <div v-if="currentView === 'docs'">
