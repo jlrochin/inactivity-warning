@@ -10,8 +10,9 @@ export default defineConfig({
     build: {
         lib: {
             entry: resolve(__dirname, 'src/index.js'),
-            name: 'VueInactivityWarning',
-            fileName: (format) => `index.${format}.js`
+            name: 'InactivityWarning',
+            fileName: (format) => `index.${format}.js`,
+            formats: ['es', 'umd']
         },
         rollupOptions: {
             external: [
@@ -34,6 +35,8 @@ export default defineConfig({
                     '@angular/platform-browser-dynamic': 'ng.platformBrowserDynamic'
                 }
             }
-        }
+        },
+        minify: 'terser',
+        sourcemap: true
     }
 })

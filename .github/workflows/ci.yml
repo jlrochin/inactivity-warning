@@ -30,29 +30,61 @@ jobs:
       - name: Run linter
         run: npm run lint
 
-      # - name: Run type check
-      #   run: npm run type-check
-      # - name: Run tests
-      #   run: npm run test
-      - name: Build package
-        run:
-          npm run build
+      - name: Run type check
+        run: npm run type-check
 
-          # - name: Upload coverage to Codecov
-        #   if: matrix.node-version == '20.x'
-        #   uses: codecov/codecov-action@v3
-        #   with:
-        #     file: ./coverage/lcov.info
-        #     flags: unittests
-        #     name: codecov-umbrella
+      - name: Run tests
+        run: npm run test
+
+      - name: Build package
+        run: npm run build
+
+      - name: Verify build artifacts
+        run: |
+          if [ ! -d "dist" ]; then
+            echo "Error: dist directory not found"
+            exit 1
+          fi
+          if [ ! -f "dist/index.es.js" ]; then
+            echo "Error: ES module not found"
+            exit 1
+          fi
+          if [ ! -f "dist/index.umd.js" ]; then
+            echo "Error: UMD module not found"
+            exit 1
+          fi
+          echo "Build artifacts verified successfully"
+
+      # - name: Upload coverage to Codecov
+      #   if: matrix.node-version == '20.x'
+      #   uses: codecov/codecov-action@v3
+      #   with:
+      #     file: ./coverage/lcov.info
+      #     flags: unittests
+      #     name: codecov-umbrella
 
   publish:
     needs: test
     runs-on: ubuntu-latest
     if: github.event_name == 'release' && github.event.action == 'published'
+    permissions:
+      contents: read
+      packages: write
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Check NPM token availability
+        run: |
+          if [ -z "$NPM_TOKEN" ]; then
+            echo "Warning: NPM_TOKEN is not configured. Skipping publish step."
+            echo "Please configure NPM_TOKEN secret in repository settings."
+            echo "NPM_TOKEN_AVAILABLE=false" >> $GITHUB_ENV
+          else
+            echo "NPM_TOKEN_AVAILABLE=true" >> $GITHUB_ENV
+          fi
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Use Node.js 20.x
         uses: actions/setup-node@v4
@@ -68,6 +100,7 @@ jobs:
         run: npm run build
 
       - name: Publish to npm
+        if: env.NPM_TOKEN_AVAILABLE == 'true'
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
