@@ -57,151 +57,151 @@
           </div>
         </div>
 
-      <!-- Demo Section -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
-        <!-- Configuration Panel -->
-        <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
-          <h2 class="text-2xl font-bold text-gray-900 mb-6">Configuración del Timer</h2>
-          
-          <div class="space-y-6">
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">
-                  Tiempo total (segundos)
-                </label>
-                <input
-                  v-model.number="config.timeoutSeconds"
-                  type="number"
-                  min="10"
-                  max="600"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-              
-              <div>
-                <label class="block text-sm font-medium text-gray-700 mb-2">
-                  Tiempo de advertencia (segundos)
-                </label>
-                <input
-                  v-model.number="config.warningSeconds"
-                  type="number"
-                  min="5"
-                  :max="config.timeoutSeconds - 5"
-                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label class="block text-sm font-medium text-gray-700 mb-2">
-                Tema del Modal
-              </label>
-              <select
-                v-model="theme"
-                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              >
-                <option value="default">Default</option>
-                <option value="dark">Dark</option>
-                <option value="minimal">Minimal</option>
-              </select>
-            </div>
-
-            <div class="flex gap-3">
-              <button
-                @click="updateConfig"
-                class="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
-              >
-                Actualizar Configuración
-              </button>
-              
-              <button
-                @click="testWarning"
-                class="flex-1 border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors"
-              >
-                Probar Advertencia
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Status Panel -->
-        <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
-          <h2 class="text-2xl font-bold text-gray-900 mb-6">Estado del Timer</h2>
-          
-          <div class="space-y-4">
-            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-              <span class="text-sm font-medium text-gray-600">Estado del Timer</span>
-              <div class="flex items-center space-x-2">
-                <div class="w-2 h-2 rounded-full" :class="inactivityWarning.isActive.value ? 'bg-green-500' : 'bg-gray-400'"></div>
-                <span class="text-sm font-semibold" :class="inactivityWarning.isActive.value ? 'text-green-700' : 'text-gray-500'">
-                  {{ inactivityWarning.isActive.value ? 'Activo' : 'Inactivo' }}
-                </span>
-              </div>
-            </div>
+        <!-- Demo Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-16">
+          <!-- Configuration Panel -->
+          <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Configuración del Timer</h2>
             
-            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-              <span class="text-sm font-medium text-gray-600">Advertencia Visible</span>
-              <div class="flex items-center space-x-2">
-                <div class="w-2 h-2 rounded-full" :class="inactivityWarning.isWarningVisible.value ? 'bg-yellow-500' : 'bg-gray-400'"></div>
-                <span class="text-sm font-semibold" :class="inactivityWarning.isWarningVisible.value ? 'text-yellow-700' : 'text-gray-500'">
-                  {{ inactivityWarning.isWarningVisible.value ? 'Visible' : 'Oculta' }}
-                </span>
-              </div>
-            </div>
-            
-            <div v-if="inactivityWarning.isWarningVisible.value" class="p-4 bg-red-50 rounded-lg border border-red-200">
-              <div class="text-center">
-                <div class="text-3xl font-bold text-red-600 mb-2">
-                  {{ inactivityWarning.formatTimeRemaining() }}
+            <div class="space-y-6">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Tiempo total (segundos)
+                  </label>
+                  <input
+                    v-model.number="config.timeoutSeconds"
+                    type="number"
+                    min="10"
+                    max="600"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
                 </div>
-                <div class="text-sm text-red-700">Tiempo restante</div>
+                
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2">
+                    Tiempo de advertencia (segundos)
+                  </label>
+                  <input
+                    v-model.number="config.warningSeconds"
+                    type="number"
+                    min="5"
+                    :max="config.timeoutSeconds - 5"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <!-- Instructions -->
-      <div class="bg-blue-50 rounded-xl border border-blue-200 p-6 mb-16">
-        <h3 class="text-lg font-semibold text-blue-900 mb-4">Cómo Usar</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="space-y-2">
-            <div class="flex items-start space-x-3">
-              <div class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">1</div>
               <div>
-                <div class="font-medium text-blue-900">Inicia Sesión</div>
-                <div class="text-sm text-blue-700">Haz clic en "Login" para activar el timer</div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">
+                  Tema del Modal
+                </label>
+                <select
+                  v-model="theme"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                >
+                  <option value="default">Default</option>
+                  <option value="dark">Dark</option>
+                  <option value="minimal">Minimal</option>
+                </select>
               </div>
-            </div>
-            
-            <div class="flex items-start space-x-3">
-              <div class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">2</div>
-              <div>
-                <div class="font-medium text-blue-900">Configura Tiempos</div>
-                <div class="text-sm text-blue-700">Ajusta los tiempos y actualiza la configuración</div>
+
+              <div class="flex gap-3">
+                <button
+                  @click="updateConfig"
+                  class="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors"
+                >
+                  Actualizar Configuración
+                </button>
+                
+                <button
+                  @click="testWarning"
+                  class="flex-1 border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-50 transition-colors"
+                >
+                  Probar Advertencia
+                </button>
               </div>
             </div>
           </div>
-          
-          <div class="space-y-2">
-            <div class="flex items-start space-x-3">
-              <div class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">3</div>
-              <div>
-                <div class="font-medium text-blue-900">Interactúa</div>
-                <div class="text-sm text-blue-700">Mueve el mouse para resetear el timer</div>
-              </div>
-            </div>
+
+          <!-- Status Panel -->
+          <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Estado del Timer</h2>
             
-            <div class="flex items-start space-x-3">
-              <div class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">4</div>
-              <div>
-                <div class="font-medium text-blue-900">Prueba la Advertencia</div>
-                <div class="text-sm text-blue-700">Usa "Probar Advertencia" para simular</div>
+            <div class="space-y-4">
+              <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                <span class="text-sm font-medium text-gray-600">Estado del Timer</span>
+                <div class="flex items-center space-x-2">
+                  <div class="w-2 h-2 rounded-full" :class="inactivityWarning.isActive.value ? 'bg-green-500' : 'bg-gray-400'"></div>
+                  <span class="text-sm font-semibold" :class="inactivityWarning.isActive.value ? 'text-green-700' : 'text-gray-500'">
+                    {{ inactivityWarning.isActive.value ? 'Activo' : 'Inactivo' }}
+                  </span>
+                </div>
+              </div>
+              
+              <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                <span class="text-sm font-medium text-gray-600">Advertencia Visible</span>
+                <div class="flex items-center space-x-2">
+                  <div class="w-2 h-2 rounded-full" :class="inactivityWarning.isWarningVisible.value ? 'bg-yellow-500' : 'bg-gray-400'"></div>
+                  <span class="text-sm font-semibold" :class="inactivityWarning.isWarningVisible.value ? 'text-yellow-700' : 'text-gray-500'">
+                    {{ inactivityWarning.isWarningVisible.value ? 'Visible' : 'Oculta' }}
+                  </span>
+                </div>
+              </div>
+              
+              <div v-if="inactivityWarning.isWarningVisible.value" class="p-4 bg-red-50 rounded-lg border border-red-200">
+                <div class="text-center">
+                  <div class="text-3xl font-bold text-red-600 mb-2">
+                    {{ inactivityWarning.formatTimeRemaining() }}
+                  </div>
+                  <div class="text-sm text-red-700">Tiempo restante</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+
+        <!-- Instructions -->
+        <div class="bg-blue-50 rounded-xl border border-blue-200 p-6 mb-16">
+          <h3 class="text-lg font-semibold text-blue-900 mb-4">Cómo Usar</h3>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-2">
+              <div class="flex items-start space-x-3">
+                <div class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">1</div>
+                <div>
+                  <div class="font-medium text-blue-900">Inicia Sesión</div>
+                  <div class="text-sm text-blue-700">Haz clic en "Login" para activar el timer</div>
+                </div>
+              </div>
+              
+              <div class="flex items-start space-x-3">
+                <div class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">2</div>
+                <div>
+                  <div class="font-medium text-blue-900">Configura Tiempos</div>
+                  <div class="text-sm text-blue-700">Ajusta los tiempos y actualiza la configuración</div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="space-y-2">
+              <div class="flex items-start space-x-3">
+                <div class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">3</div>
+                <div>
+                  <div class="font-medium text-blue-900">Interactúa</div>
+                  <div class="text-sm text-blue-700">Mueve el mouse para resetear el timer</div>
+                </div>
+              </div>
+              
+              <div class="flex items-start space-x-3">
+                <div class="w-6 h-6 bg-blue-600 text-white rounded-full flex items-center justify-center text-sm font-bold">4</div>
+                <div>
+                  <div class="font-medium text-blue-900">Prueba la Advertencia</div>
+                  <div class="text-sm text-blue-700">Usa "Probar Advertencia" para simular</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Documentation View -->
@@ -221,22 +221,22 @@
         <div class="bg-white rounded-xl shadow-lg border border-gray-200 p-8">
           <h2 class="text-3xl font-bold text-gray-900 mb-8">Documentación Completa</h2>
         
-        <!-- Installation -->
-        <div class="mb-12">
-          <h3 class="text-2xl font-semibold text-gray-900 mb-4">Instalación</h3>
-          <div class="bg-gray-900 rounded-lg p-4 mb-4">
-            <code class="text-green-400">npm install vue-inactivity-warning</code>
+          <!-- Installation -->
+          <div class="mb-12">
+            <h3 class="text-2xl font-semibold text-gray-900 mb-4">Instalación</h3>
+            <div class="bg-gray-900 rounded-lg p-4 mb-4">
+              <code class="text-green-400">npm install inactivity-warning</code>
+            </div>
+            <p class="text-gray-600 mb-4">
+              Instala el paquete usando npm o yarn. El componente es compatible con múltiples frameworks y no requiere dependencias adicionales.
+            </p>
           </div>
-          <p class="text-gray-600 mb-4">
-            Instala el paquete usando npm o yarn. El componente es compatible con múltiples frameworks y no requiere dependencias adicionales.
-          </p>
-        </div>
 
-        <!-- Vue 3 Usage -->
-        <div class="mb-12">
-          <h3 class="text-2xl font-semibold text-gray-900 mb-4">Vue 3 - Uso Básico</h3>
-          <div class="bg-gray-900 rounded-lg p-4 mb-4">
-            <pre class="text-gray-300 text-sm"><code>&lt;template&gt;
+          <!-- Vue 3 Usage -->
+          <div class="mb-12">
+            <h3 class="text-2xl font-semibold text-gray-900 mb-4">Vue 3 - Uso Básico</h3>
+            <div class="bg-gray-900 rounded-lg p-4 mb-4">
+              <pre class="text-gray-300 text-sm"><code>&lt;template&gt;
   &lt;div&gt;
     &lt;!-- Tu contenido aquí --&gt;
     &lt;InactivityWarning
@@ -252,7 +252,7 @@
 
 &lt;script setup&gt;
 import { ref } from 'vue'
-import { useInactivityTimer, InactivityWarning } from 'vue-inactivity-warning'
+import { useInactivityTimer, InactivityWarning } from 'inactivity-warning'
 
 // Configuración del timer
 const config = {
@@ -269,24 +269,24 @@ const handleLogout = () => {
   // Aquí puedes redirigir al login o limpiar la sesión
 }
 &lt;/script&gt;</code></pre>
+            </div>
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              <h4 class="font-semibold text-blue-900 mb-2">Explicación:</h4>
+              <ul class="text-sm text-blue-800 space-y-1">
+                <li><strong>useInactivityTimer:</strong> Composable que maneja toda la lógica del timer</li>
+                <li><strong>isWarningVisible:</strong> Estado reactivo que indica si la advertencia está visible</li>
+                <li><strong>timeRemaining:</strong> Tiempo restante antes del logout automático</li>
+                <li><strong>extendSession:</strong> Función para extender la sesión cuando el usuario interactúa</li>
+              </ul>
+            </div>
           </div>
-          <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <h4 class="font-semibold text-blue-900 mb-2">Explicación:</h4>
-            <ul class="text-sm text-blue-800 space-y-1">
-              <li><strong>useInactivityTimer:</strong> Composable que maneja toda la lógica del timer</li>
-              <li><strong>isWarningVisible:</strong> Estado reactivo que indica si la advertencia está visible</li>
-              <li><strong>timeRemaining:</strong> Tiempo restante antes del logout automático</li>
-              <li><strong>extendSession:</strong> Función para extender la sesión cuando el usuario interactúa</li>
-            </ul>
-          </div>
-        </div>
 
-        <!-- React Usage -->
-        <div class="mb-12">
-          <h3 class="text-2xl font-semibold text-gray-900 mb-4">React - Uso Básico</h3>
-          <div class="bg-gray-900 rounded-lg p-4 mb-4">
-            <pre class="text-gray-300 text-sm"><code>import React from 'react'
-import { useInactivityTimer, InactivityWarning } from 'vue-inactivity-warning/react'
+          <!-- React Usage -->
+          <div class="mb-12">
+            <h3 class="text-2xl font-semibold text-gray-900 mb-4">React - Uso Básico</h3>
+            <div class="bg-gray-900 rounded-lg p-4 mb-4">
+              <pre class="text-gray-300 text-sm"><code>import React from 'react'
+import { useInactivityTimer, InactivityWarning } from 'inactivity-warning/react'
 
 function App() {
   const config = {
@@ -316,24 +316,24 @@ function App() {
 }
 
 export default App</code></pre>
+            </div>
+            <div class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
+              <h4 class="font-semibold text-cyan-900 mb-2">Explicación:</h4>
+              <ul class="text-sm text-cyan-800 space-y-1">
+                <li><strong>useInactivityTimer:</strong> Hook personalizado que funciona igual que el composable de Vue</li>
+                <li><strong>Props:</strong> Las props son las mismas pero usando la convención de React (camelCase)</li>
+                <li><strong>Eventos:</strong> onExtend y onLogout en lugar de @extend y @logout</li>
+              </ul>
+            </div>
           </div>
-          <div class="bg-cyan-50 border border-cyan-200 rounded-lg p-4">
-            <h4 class="font-semibold text-cyan-900 mb-2">Explicación:</h4>
-            <ul class="text-sm text-cyan-800 space-y-1">
-              <li><strong>useInactivityTimer:</strong> Hook personalizado que funciona igual que el composable de Vue</li>
-              <li><strong>Props:</strong> Las props son las mismas pero usando la convención de React (camelCase)</li>
-              <li><strong>Eventos:</strong> onExtend y onLogout en lugar de @extend y @logout</li>
-            </ul>
-          </div>
-        </div>
 
-        <!-- Angular Usage -->
-        <div class="mb-12">
-          <h3 class="text-2xl font-semibold text-gray-900 mb-4">Angular - Uso Básico</h3>
-          <div class="bg-gray-900 rounded-lg p-4 mb-4">
-            <pre class="text-gray-300 text-sm"><code>// app.component.ts
+          <!-- Angular Usage -->
+          <div class="mb-12">
+            <h3 class="text-2xl font-semibold text-gray-900 mb-4">Angular - Uso Básico</h3>
+            <div class="bg-gray-900 rounded-lg p-4 mb-4">
+              <pre class="text-gray-300 text-sm"><code>// app.component.ts
 import { Component } from '@angular/core'
-import { InactivityTimerService } from 'vue-inactivity-warning/angular'
+import { InactivityTimerService } from 'inactivity-warning/angular'
 
 @Component({
   selector: 'app-root',
@@ -364,30 +364,30 @@ export class AppComponent {
     console.log('Usuario desconectado por inactividad')
   }
 }</code></pre>
+            </div>
+            <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+              <h4 class="font-semibold text-red-900 mb-2">Explicación:</h4>
+              <ul class="text-sm text-red-800 space-y-1">
+                <li><strong>InactivityTimerService:</strong> Servicio inyectable que maneja la lógica del timer</li>
+                <li><strong>Observables:</strong> isWarningVisible$ y timeRemaining$ son observables de RxJS</li>
+                <li><strong>configure:</strong> Método para configurar los tiempos del timer</li>
+                <li><strong>Async Pipe:</strong> Usa el pipe async para suscribirte a los observables</li>
+              </ul>
+            </div>
           </div>
-          <div class="bg-red-50 border border-red-200 rounded-lg p-4">
-            <h4 class="font-semibold text-red-900 mb-2">Explicación:</h4>
-            <ul class="text-sm text-red-800 space-y-1">
-              <li><strong>InactivityTimerService:</strong> Servicio inyectable que maneja la lógica del timer</li>
-              <li><strong>Observables:</strong> isWarningVisible$ y timeRemaining$ son observables de RxJS</li>
-              <li><strong>configure:</strong> Método para configurar los tiempos del timer</li>
-              <li><strong>Async Pipe:</strong> Usa el pipe async para suscribirte a los observables</li>
-            </ul>
-          </div>
-        </div>
 
-        <!-- Vanilla JS Usage -->
-        <div class="mb-12">
-          <h3 class="text-2xl font-semibold text-gray-900 mb-4">Vanilla JavaScript - Uso Básico</h3>
-          <div class="bg-gray-900 rounded-lg p-4 mb-4">
-            <pre class="text-gray-300 text-sm"><code>&lt;!-- HTML --&gt;
+          <!-- Vanilla JS Usage -->
+          <div class="mb-12">
+            <h3 class="text-2xl font-semibold text-gray-900 mb-4">Vanilla JavaScript - Uso Básico</h3>
+            <div class="bg-gray-900 rounded-lg p-4 mb-4">
+              <pre class="text-gray-300 text-sm"><code>&lt;!-- HTML --&gt;
 &lt;div id="app"&gt;
   &lt;!-- Tu contenido aquí --&gt;
   &lt;div id="inactivity-warning"&gt;&lt;/div&gt;
 &lt;/div&gt;
 
 &lt;script type="module"&gt;
-import { InactivityTimer, InactivityWarning } from 'vue-inactivity-warning/vanilla'
+import { InactivityTimer, InactivityWarning } from 'inactivity-warning/vanilla'
 
 // Configuración
 const config = {
@@ -425,107 +425,108 @@ warning.onLogout(() => {
 // Iniciar el timer
 timer.start()
 &lt;/script&gt;</code></pre>
-          </div>
-          <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-            <h4 class="font-semibold text-yellow-900 mb-2">Explicación:</h4>
-            <ul class="text-sm text-yellow-800 space-y-1">
-              <li><strong>InactivityTimer:</strong> Clase que maneja la lógica del timer</li>
-              <li><strong>InactivityWarning:</strong> Clase que maneja la UI del modal de advertencia</li>
-              <li><strong>Eventos:</strong> onWarning, onTimeout, onExtend, onLogout para manejar diferentes estados</li>
-              <li><strong>start():</strong> Método para iniciar el timer</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Configuration Options -->
-        <div class="mb-12">
-          <h3 class="text-2xl font-semibold text-gray-900 mb-4">Opciones de Configuración</h3>
-          <div class="overflow-x-auto">
-            <table class="min-w-full bg-white border border-gray-200 rounded-lg">
-              <thead class="bg-gray-50">
-                <tr>
-                  <th class="px-4 py-3 text-left text-sm font-semibold text-gray-900">Propiedad</th>
-                  <th class="px-4 py-3 text-left text-sm font-semibold text-gray-900">Tipo</th>
-                  <th class="px-4 py-3 text-left text-sm font-semibold text-gray-900">Valor por defecto</th>
-                  <th class="px-4 py-3 text-left text-sm font-semibold text-gray-900">Descripción</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-gray-200">
-                <tr>
-                  <td class="px-4 py-3 text-sm text-gray-900 font-mono">timeoutSeconds</td>
-                  <td class="px-4 py-3 text-sm text-gray-600">number</td>
-                  <td class="px-4 py-3 text-sm text-gray-600">300</td>
-                  <td class="px-4 py-3 text-sm text-gray-600">Tiempo total antes del logout automático (en segundos)</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm text-gray-900 font-mono">warningSeconds</td>
-                  <td class="px-4 py-3 text-sm text-gray-600">number</td>
-                  <td class="px-4 py-3 text-sm text-gray-600">30</td>
-                  <td class="px-4 py-3 text-sm text-gray-600">Tiempo de advertencia antes del logout (en segundos)</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm text-gray-900 font-mono">theme</td>
-                  <td class="px-4 py-3 text-sm text-gray-600">string</td>
-                  <td class="px-4 py-3 text-sm text-gray-600">'default'</td>
-                  <td class="px-4 py-3 text-sm text-gray-600">Tema del modal: 'default', 'dark', 'minimal'</td>
-                </tr>
-                <tr>
-                  <td class="px-4 py-3 text-sm text-gray-900 font-mono">showButtons</td>
-                  <td class="px-4 py-3 text-sm text-gray-600">boolean</td>
-                  <td class="px-4 py-3 text-sm text-gray-600">true</td>
-                  <td class="px-4 py-3 text-sm text-gray-600">Mostrar botones de extender sesión y logout</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Events -->
-        <div class="mb-12">
-          <h3 class="text-2xl font-semibold text-gray-900 mb-4">Eventos</h3>
-          <div class="space-y-4">
-            <div class="bg-gray-50 rounded-lg p-4">
-              <h4 class="font-semibold text-gray-900 mb-2">@extend / onExtend</h4>
-              <p class="text-sm text-gray-600">Se dispara cuando el usuario hace clic en "Extender Sesión"</p>
-              <div class="bg-gray-900 rounded p-2 mt-2">
-                <code class="text-green-400 text-sm">// Vue: @extend="handleExtend"</code><br>
-                <code class="text-green-400 text-sm">// React: onExtend={handleExtend}</code>
-              </div>
             </div>
-            
-            <div class="bg-gray-50 rounded-lg p-4">
-              <h4 class="font-semibold text-gray-900 mb-2">@logout / onLogout</h4>
-              <p class="text-sm text-gray-600">Se dispara cuando el usuario hace clic en "Cerrar Sesión" o cuando se agota el tiempo</p>
-              <div class="bg-gray-900 rounded p-2 mt-2">
-                <code class="text-green-400 text-sm">// Vue: @logout="handleLogout"</code><br>
-                <code class="text-green-400 text-sm">// React: onLogout={handleLogout}</code>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Best Practices -->
-        <div class="mb-12">
-          <h3 class="text-2xl font-semibold text-gray-900 mb-4">Mejores Prácticas</h3>
-          <div class="space-y-4">
-            <div class="bg-green-50 border border-green-200 rounded-lg p-4">
-              <h4 class="font-semibold text-green-900 mb-2">✅ Configuración Recomendada</h4>
-              <ul class="text-sm text-green-800 space-y-1">
-                <li>• Usa 5-15 minutos para timeoutSeconds en aplicaciones web</li>
-                <li>• Configura 30-60 segundos para warningSeconds</li>
-                <li>• Siempre proporciona una forma de extender la sesión</li>
-                <li>• Guarda el trabajo del usuario antes del logout automático</li>
-              </ul>
-            </div>
-            
             <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-              <h4 class="font-semibold text-yellow-900 mb-2">⚠️ Consideraciones</h4>
+              <h4 class="font-semibold text-yellow-900 mb-2">Explicación:</h4>
               <ul class="text-sm text-yellow-800 space-y-1">
-                <li>• El timer se resetea con cualquier interacción del usuario</li>
-                <li>• Considera pausar el timer durante videos o presentaciones</li>
-                <li>• En móviles, el timer puede pausarse cuando la app está en segundo plano</li>
-                <li>• Prueba diferentes temas para encontrar el que mejor se adapte a tu diseño</li>
+                <li><strong>InactivityTimer:</strong> Clase que maneja la lógica del timer</li>
+                <li><strong>InactivityWarning:</strong> Clase que maneja la UI del modal de advertencia</li>
+                <li><strong>Eventos:</strong> onWarning, onTimeout, onExtend, onLogout para manejar diferentes estados</li>
+                <li><strong>start():</strong> Método para iniciar el timer</li>
               </ul>
+            </div>
+          </div>
+
+          <!-- Configuration Options -->
+          <div class="mb-12">
+            <h3 class="text-2xl font-semibold text-gray-900 mb-4">Opciones de Configuración</h3>
+            <div class="overflow-x-auto">
+              <table class="min-w-full bg-white border border-gray-200 rounded-lg">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-900">Propiedad</th>
+                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-900">Tipo</th>
+                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-900">Valor por defecto</th>
+                    <th class="px-4 py-3 text-left text-sm font-semibold text-gray-900">Descripción</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                  <tr>
+                    <td class="px-4 py-3 text-sm text-gray-900 font-mono">timeoutSeconds</td>
+                    <td class="px-4 py-3 text-sm text-gray-600">number</td>
+                    <td class="px-4 py-3 text-sm text-gray-600">300</td>
+                    <td class="px-4 py-3 text-sm text-gray-600">Tiempo total antes del logout automático (en segundos)</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 text-sm text-gray-900 font-mono">warningSeconds</td>
+                    <td class="px-4 py-3 text-sm text-gray-600">number</td>
+                    <td class="px-4 py-3 text-sm text-gray-600">30</td>
+                    <td class="px-4 py-3 text-sm text-gray-600">Tiempo de advertencia antes del logout (en segundos)</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 text-sm text-gray-900 font-mono">theme</td>
+                    <td class="px-4 py-3 text-sm text-gray-600">string</td>
+                    <td class="px-4 py-3 text-sm text-gray-600">'default'</td>
+                    <td class="px-4 py-3 text-sm text-gray-600">Tema del modal: 'default', 'dark', 'minimal'</td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-3 text-sm text-gray-900 font-mono">showButtons</td>
+                    <td class="px-4 py-3 text-sm text-gray-600">boolean</td>
+                    <td class="px-4 py-3 text-sm text-gray-600">true</td>
+                    <td class="px-4 py-3 text-sm text-gray-600">Mostrar botones de extender sesión y logout</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Events -->
+          <div class="mb-12">
+            <h3 class="text-2xl font-semibold text-gray-900 mb-4">Eventos</h3>
+            <div class="space-y-4">
+              <div class="bg-gray-50 rounded-lg p-4">
+                <h4 class="font-semibold text-gray-900 mb-2">@extend / onExtend</h4>
+                <p class="text-sm text-gray-600">Se dispara cuando el usuario hace clic en "Extender Sesión"</p>
+                <div class="bg-gray-900 rounded p-2 mt-2">
+                  <code class="text-green-400 text-sm">// Vue: @extend="handleExtend"</code><br>
+                  <code class="text-green-400 text-sm">// React: onExtend={handleExtend}</code>
+                </div>
+              </div>
+              
+              <div class="bg-gray-50 rounded-lg p-4">
+                <h4 class="font-semibold text-gray-900 mb-2">@logout / onLogout</h4>
+                <p class="text-sm text-gray-600">Se dispara cuando el usuario hace clic en "Cerrar Sesión" o cuando se agota el tiempo</p>
+                <div class="bg-gray-900 rounded p-2 mt-2">
+                  <code class="text-green-400 text-sm">// Vue: @logout="handleLogout"</code><br>
+                  <code class="text-green-400 text-sm">// React: onLogout={handleLogout}</code>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Best Practices -->
+          <div class="mb-12">
+            <h3 class="text-2xl font-semibold text-gray-900 mb-4">Mejores Prácticas</h3>
+            <div class="space-y-4">
+              <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                <h4 class="font-semibold text-green-900 mb-2">✅ Configuración Recomendada</h4>
+                <ul class="text-sm text-green-800 space-y-1">
+                  <li>• Usa 5-15 minutos para timeoutSeconds en aplicaciones web</li>
+                  <li>• Configura 30-60 segundos para warningSeconds</li>
+                  <li>• Siempre proporciona una forma de extender la sesión</li>
+                  <li>• Guarda el trabajo del usuario antes del logout automático</li>
+                </ul>
+              </div>
+              
+              <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                <h4 class="font-semibold text-yellow-900 mb-2">⚠️ Consideraciones</h4>
+                <ul class="text-sm text-yellow-800 space-y-1">
+                  <li>• El timer se resetea con cualquier interacción del usuario</li>
+                  <li>• Considera pausar el timer durante videos o presentaciones</li>
+                  <li>• En móviles, el timer puede pausarse cuando la app está en segundo plano</li>
+                  <li>• Prueba diferentes temas para encontrar el que mejor se adapte a tu diseño</li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
