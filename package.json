@@ -38,16 +38,16 @@
     "typescript",
     "multi-framework"
   ],
-  "author": "jlrupton <jlrupton@example.com>",
+  "author": "jlrochin <jlrochin@example.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jlrupton/inactivity-warning.git"
+    "url": "https://github.com/jlrochin/inactivity-warning.git"
   },
   "bugs": {
-    "url": "https://github.com/jlrupton/inactivity-warning/issues"
+    "url": "https://github.com/jlrochin/inactivity-warning/issues"
   },
-  "homepage": "https://github.com/jlrupton/inactivity-warning#readme",
+  "homepage": "https://github.com/jlrochin/inactivity-warning#readme",
   "peerDependencies": {
     "vue": "^3.0.0 || ^2.0.0",
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
