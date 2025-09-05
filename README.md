@@ -1,144 +1,133 @@
-# Multi-Framework Inactivity Warning
+# Inactivity Warning
 
-Componente reutilizable para advertencia de cierre de sesión por inactividad compatible con **Vue 3**, **React**, **Angular** y **Vanilla JavaScript**.
+[![npm version](https://badge.fury.io/js/inactivity-warning.svg)](https://badge.fury.io/js/inactivity-warning)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![GitHub stars](https://img.shields.io/github/stars/jrochinu/inactivity-warning.svg)](https://github.com/jrochinu/inactivity-warning/stargazers)
 
-## 🚀 Características
+Un componente moderno y reutilizable para manejar advertencias de cierre de sesión por inactividad. Compatible con **Vue 3**, **React**, **Angular** y **Vanilla JavaScript**.
 
-- ⏰ **Timer configurable** - Personaliza el tiempo de inactividad y advertencia
-- 🎨 **Múltiples temas** - Default, Dark y Minimal
-- 🔧 **Altamente personalizable** - Props, callbacks y estilos
-- 📱 **Responsive** - Funciona en desktop y móvil
-- 🎯 **TypeScript ready** - Tipos incluidos
-- 🪶 **Ligero** - Sin dependencias pesadas
-- 🌐 **Multi-framework** - Compatible con los frameworks más populares
-- ♿ **Accesible** - Diseño accesible por defecto
+## ✨ Características
+
+- 🚀 **Multi-framework**: Soporte para Vue 3, React, Angular y Vanilla JS
+- ⚡ **Ligero**: Solo ~37KB comprimido
+- 🎨 **Temas**: Múltiples temas incluidos (default, dark, minimal)
+- 🔧 **Configurable**: Tiempos personalizables y eventos flexibles
+- 📱 **Responsive**: Diseño adaptable a todos los dispositivos
+- 🛡️ **TypeScript**: Soporte completo para TypeScript
+- 🧪 **Testeable**: Fácil de testear y mockear
 
 ## 📦 Instalación
 
 ```bash
-npm install vue-inactivity-warning
-# o
-yarn add vue-inactivity-warning
-# o
-pnpm add vue-inactivity-warning
+npm install inactivity-warning
 ```
 
-## 🌐 Frameworks Soportados
-
-- **Vue 3** - Composable + Componente
-- **React** - Hook + Componente
-- **Angular** - Servicio + Componente
-- **Vanilla JavaScript** - Clases ES6
-
-## 🚀 Uso por Framework
+## 🚀 Uso Rápido
 
 ### Vue 3
 
 ```vue
 <template>
   <div>
-    <!-- Tu aplicación -->
+    <!-- Tu contenido aquí -->
     <InactivityWarning
-      :is-visible="isWarningVisible"
-      :time-remaining="timeRemaining"
-      @extend="extendSession"
-      @logout="logout"
+      :is-visible="inactivityWarning.isWarningVisible.value"
+      :time-remaining="inactivityWarning.timeRemaining.value"
+      theme="default"
+      :show-buttons="true"
+      @extend="inactivityWarning.extendSession"
+      @logout="handleLogout"
     />
   </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useInactivityTimer, InactivityWarning } from "vue-inactivity-warning";
+import { ref } from 'vue'
+import { useInactivityTimer, InactivityWarning } from 'inactivity-warning'
 
-const { isWarningVisible, timeRemaining, startMonitoring, extendSession } =
-  useInactivityTimer({
-    timeoutSeconds: 60,
-    warningSeconds: 20,
-    onLogout: () => {
-      console.log("Sesión cerrada por inactividad");
-    },
-  });
+const config = {
+  timeoutSeconds: 300, // 5 minutos
+  warningSeconds: 30   // 30 segundos de advertencia
+}
 
-startMonitoring();
+const inactivityWarning = useInactivityTimer(config)
+
+const handleLogout = () => {
+  console.log('Usuario desconectado por inactividad')
+  // Redirigir al login o limpiar la sesión
+}
 </script>
 ```
 
 ### React
 
 ```jsx
-import React, { useState, useEffect } from "react";
-import {
-  useInactivityTimer,
-  InactivityWarning,
-} from "vue-inactivity-warning/react";
+import React from 'react'
+import { useInactivityTimer, InactivityWarning } from 'inactivity-warning/react'
 
 function App() {
-  const inactivityWarning = useInactivityTimer({
-    timeoutSeconds: 60,
-    warningSeconds: 20,
-    onLogout: () => {
-      console.log("Sesión cerrada por inactividad");
-    },
-  });
+  const config = {
+    timeoutSeconds: 300,
+    warningSeconds: 30
+  }
 
-  useEffect(() => {
-    inactivityWarning.startMonitoring();
-  }, []);
+  const inactivityWarning = useInactivityTimer(config)
+
+  const handleLogout = () => {
+    console.log('Usuario desconectado por inactividad')
+  }
 
   return (
     <div>
-      {/* Tu aplicación */}
+      {/* Tu contenido aquí */}
       <InactivityWarning
         isVisible={inactivityWarning.isWarningVisible}
         timeRemaining={inactivityWarning.timeRemaining}
+        theme="default"
+        showButtons={true}
         onExtend={inactivityWarning.extendSession}
-        onLogout={() => console.log("Logout")}
+        onLogout={handleLogout}
       />
     </div>
-  );
+  )
 }
+
+export default App
 ```
 
 ### Angular
 
 ```typescript
-import { Component, OnInit } from "@angular/core";
-import {
-  InactivityTimerService,
-  InactivityWarningComponent,
-} from "vue-inactivity-warning/angular";
+// app.component.ts
+import { Component } from '@angular/core'
+import { InactivityTimerService } from 'inactivity-warning/angular'
 
 @Component({
-  selector: "app-root",
+  selector: 'app-root',
   template: `
     <div>
-      <!-- Tu aplicación -->
+      <!-- Tu contenido aquí -->
       <app-inactivity-warning
-        [isVisible]="isWarningVisible$ | async"
-        [timeRemaining]="timeRemaining$ | async"
-        (extend)="extendSession()"
-        (logout)="logout()"
+        [isVisible]="inactivityService.isWarningVisible$ | async"
+        [timeRemaining]="inactivityService.timeRemaining$ | async"
+        theme="default"
+        [showButtons]="true"
+        (extend)="inactivityService.extendSession()"
+        (logout)="handleLogout()"
       ></app-inactivity-warning>
     </div>
-  `,
+  `
 })
-export class AppComponent implements OnInit {
-  isWarningVisible$ = this.timerService.isWarningVisible$;
-  timeRemaining$ = this.timerService.timeRemaining$;
-
-  constructor(private timerService: InactivityTimerService) {}
-
-  ngOnInit() {
-    this.timerService.startMonitoring();
+export class AppComponent {
+  constructor(public inactivityService: InactivityTimerService) {
+    this.inactivityService.configure({
+      timeoutSeconds: 300,
+      warningSeconds: 30
+    })
   }
 
-  extendSession() {
-    this.timerService.extendSession();
-  }
-
-  logout() {
-    this.timerService.stopMonitoring();
+  handleLogout() {
+    console.log('Usuario desconectado por inactividad')
   }
 }
 ```
@@ -146,159 +135,161 @@ export class AppComponent implements OnInit {
 ### Vanilla JavaScript
 
 ```html
-<!DOCTYPE html>
-<html>
-  <head>
-    <script type="module">
-      import {
-        InactivityTimer,
-        InactivityWarning,
-      } from "vue-inactivity-warning/vanilla";
+<div id="app">
+  <!-- Tu contenido aquí -->
+  <div id="inactivity-warning"></div>
+</div>
 
-      const timer = new InactivityTimer({
-        timeoutSeconds: 60,
-        warningSeconds: 20,
-        onLogout: () => {
-          console.log("Sesión cerrada por inactividad");
-        },
-      });
+<script type="module">
+import { InactivityTimer, InactivityWarning } from 'inactivity-warning/vanilla'
 
-      const warning = new InactivityWarning({
-        onExtend: () => timer.extendSession(),
-        onLogout: () => timer.stopMonitoring(),
-      });
-
-      // Escuchar cambios de estado
-      timer.onStateChange = (state) => {
-        if (state.isWarningVisible) {
-          warning.show();
-        } else {
-          warning.hide();
-        }
-      };
-
-      // Iniciar monitoring
-      timer.startMonitoring();
-    </script>
-  </head>
-  <body>
-    <!-- Tu aplicación -->
-  </body>
-</html>
-```
-
-## ⚙️ Configuración Común
-
-Todos los frameworks comparten la misma configuración:
-
-```javascript
-{
-  timeoutSeconds: 60,        // Tiempo total antes de cerrar sesión
-  warningSeconds: 20,        // Tiempo para mostrar advertencia
-  onLogout: () => {},        // Callback de cierre de sesión
-  onWarning: () => {},       // Callback de advertencia
-  onExtend: () => {},        // Callback de extensión
-  resetEvents: [             // Eventos que resetean el timer
-    'mousedown',
-    'mousemove',
-    'keypress',
-    'scroll',
-    'touchstart',
-    'click',
-    'keydown'
-  ],
-  enabled: true              // Si el timer está habilitado
+const config = {
+  timeoutSeconds: 300,
+  warningSeconds: 30
 }
+
+const timer = new InactivityTimer(config)
+const warning = new InactivityWarning('#inactivity-warning', {
+  theme: 'default',
+  showButtons: true
+})
+
+timer.onWarning(() => {
+  warning.show(timer.getTimeRemaining())
+})
+
+timer.onTimeout(() => {
+  console.log('Usuario desconectado por inactividad')
+})
+
+warning.onExtend(() => {
+  timer.extendSession()
+  warning.hide()
+})
+
+warning.onLogout(() => {
+  console.log('Usuario desconectado manualmente')
+})
+
+timer.start()
+</script>
 ```
 
-## 🔧 API Común
+## ⚙️ Configuración
 
-### Métodos Disponibles
+### Opciones de Configuración
 
-- `startMonitoring()` - Inicia el monitoring
-- `stopMonitoring()` - Detiene el monitoring
-- `pauseMonitoring()` - Pausa temporalmente
-- `resumeMonitoring()` - Reanuda el monitoring
-- `extendSession()` - Extiende la sesión
-- `resetTimer()` - Resetea el timer
-- `updateConfig(options)` - Actualiza la configuración
-- `formatTimeRemaining()` - Formatea el tiempo restante
+| Propiedad | Tipo | Valor por defecto | Descripción |
+|-----------|------|-------------------|-------------|
+| `timeoutSeconds` | `number` | `300` | Tiempo total antes del logout automático (en segundos) |
+| `warningSeconds` | `number` | `30` | Tiempo de advertencia antes del logout (en segundos) |
+| `theme` | `string` | `'default'` | Tema del modal: `'default'`, `'dark'`, `'minimal'` |
+| `showButtons` | `boolean` | `true` | Mostrar botones de extender sesión y logout |
 
-### Estado Reactivo
+### Eventos
 
-- `isWarningVisible` - Si la advertencia está visible
-- `timeRemaining` - Tiempo restante en segundos
-- `isActive` - Si el monitoring está activo
+| Evento | Descripción | Parámetros |
+|--------|-------------|------------|
+| `@extend` / `onExtend` | Se dispara cuando el usuario hace clic en "Extender Sesión" | Ninguno |
+| `@logout` / `onLogout` | Se dispara cuando el usuario hace clic en "Cerrar Sesión" o cuando se agota el tiempo | Ninguno |
 
-## 🎨 Personalización del Modal
+## 🎨 Temas
 
-### Propiedades Comunes
-
-- `title` - Título del modal
-- `message` - Mensaje principal
-- `instruction` - Instrucciones para el usuario
-- `extendButtonText` - Texto del botón de extensión
-- `logoutButtonText` - Texto del botón de cierre
-- `showButtons` - Mostrar botones de acción
-- `theme` - Tema ('default', 'dark', 'minimal')
-- `overlayClass` - Clases CSS adicionales para el overlay
-- `modalClass` - Clases CSS adicionales para el modal
-- `iconClass` - Clases CSS adicionales para el ícono
-- `countdownClass` - Clases CSS adicionales para el countdown
-
-### Temas Incluidos
-
-- **default**: Tema claro estándar
-- **dark**: Tema oscuro
-- **minimal**: Tema minimalista
-
-## 📁 Estructura del Proyecto
-
-```
-src/
-├── vue/           # Vue 3 - Composable + Componente
-├── react/         # React - Hook + Componente
-├── angular/       # Angular - Servicio + Componente
-├── vanilla/       # Vanilla JS - Clases ES6
-└── index.js       # Exportaciones principales
+### Default
+```javascript
+theme: 'default'
 ```
 
-## 📱 Ejemplos Completos
+### Dark
+```javascript
+theme: 'dark'
+```
 
-Ver el directorio `examples/` para ejemplos completos de cada framework:
+### Minimal
+```javascript
+theme: 'minimal'
+```
 
-- `examples/vue/` - Ejemplo con Vue 3
-- `examples/react/` - Ejemplo con React
-- `examples/angular/` - Ejemplo con Angular
-- `examples/vanilla/` - Ejemplo con Vanilla JavaScript
+## 📱 Ejemplo en Vivo
+
+Puedes ver un ejemplo completo funcionando en: [Demo en Vivo](https://jrochinu.github.io/inactivity-warning/)
+
+## 🧪 Testing
+
+```bash
+# Instalar dependencias de desarrollo
+npm install
+
+# Ejecutar tests
+npm test
+
+# Ejecutar tests en modo watch
+npm run test:watch
+
+# Ejecutar tests con coverage
+npm run test:coverage
+```
 
 ## 🛠️ Desarrollo
 
 ```bash
 # Clonar el repositorio
-git clone https://github.com/tu-usuario/vue-inactivity-warning.git
+git clone https://github.com/jrochinu/inactivity-warning.git
 
 # Instalar dependencias
 npm install
 
-# Desarrollo
+# Ejecutar en modo desarrollo
 npm run dev
 
-# Build
+# Construir para producción
 npm run build
 
-# Lint
+# Ejecutar linting
 npm run lint
 ```
 
-## 📄 Licencia
+## 📋 Roadmap
 
-MIT
+- [ ] Soporte para Vue 2
+- [ ] Más temas personalizables
+- [ ] Integración con frameworks de autenticación
+- [ ] Soporte para Web Workers
+- [ ] Modo offline/online detection
+- [ ] Internacionalización (i18n)
 
 ## 🤝 Contribuir
 
-Las contribuciones son bienvenidas! Por favor abre un issue o pull request.
+Las contribuciones son bienvenidas! Por favor lee nuestra [Guía de Contribución](CONTRIBUTING.md) para más detalles.
 
-## 📞 Soporte
+1. Fork el proyecto
+2. Crea tu rama de feature (`git checkout -b feature/AmazingFeature`)
+3. Commit tus cambios (`git commit -m 'Add some AmazingFeature'`)
+4. Push a la rama (`git push origin feature/AmazingFeature`)
+5. Abre un Pull Request
 
-Si tienes problemas o preguntas, por favor abre un issue en GitHub.
+## 📄 Licencia
+
+Este proyecto está licenciado bajo la Licencia MIT - ver el archivo [LICENSE](LICENSE) para más detalles.
+
+## 👨‍💻 Autor
+
+**jlrupton** - [GitHub](https://github.com/jrochinu)
+
+## 🙏 Agradecimientos
+
+- [Vue.js](https://vuejs.org/) - Framework progresivo
+- [React](https://reactjs.org/) - Biblioteca para interfaces de usuario
+- [Angular](https://angular.io/) - Plataforma de desarrollo web
+- [Vite](https://vitejs.dev/) - Herramienta de construcción rápida
+
+## 📊 Estadísticas
+
+![GitHub stars](https://img.shields.io/github/stars/jrochinu/inactivity-warning.svg)
+![GitHub forks](https://img.shields.io/github/forks/jrochinu/inactivity-warning.svg)
+![GitHub issues](https://img.shields.io/github/issues/jrochinu/inactivity-warning.svg)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/jrochinu/inactivity-warning.svg)
+
+---
+
+⭐ Si este proyecto te ha sido útil, ¡dale una estrella en GitHub!
