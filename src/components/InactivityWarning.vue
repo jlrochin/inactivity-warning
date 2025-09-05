@@ -35,17 +35,24 @@
       
       <!-- Título -->
       <h3 class="vue-inactivity-warning-title">
-        <slot name="title">{{ title }}</slot>
+        <slot name="title">
+          {{ title }}
+        </slot>
       </h3>
       
       <!-- Mensaje -->
       <p class="vue-inactivity-warning-message">
-        <slot name="message">{{ message }}</slot>
+        <slot name="message">
+          {{ message }}
+        </slot>
       </p>
       
       <!-- Countdown -->
       <div class="vue-inactivity-warning-countdown">
-        <div class="vue-inactivity-warning-countdown-circle" :class="countdownClass">
+        <div 
+          class="vue-inactivity-warning-countdown-circle" 
+          :class="countdownClass"
+        >
           <span class="vue-inactivity-warning-countdown-text">
             {{ formatTimeRemaining() }}
           </span>
@@ -54,20 +61,25 @@
       
       <!-- Información adicional -->
       <p class="vue-inactivity-warning-instruction">
-        <slot name="instruction">{{ instruction }}</slot>
+        <slot name="instruction">
+          {{ instruction }}
+        </slot>
       </p>
 
       <!-- Botones de acción (opcional) -->
-      <div v-if="showButtons" class="vue-inactivity-warning-actions">
+      <div 
+        v-if="showButtons" 
+        class="vue-inactivity-warning-actions"
+      >
         <button 
-          @click="onExtendSession" 
           class="vue-inactivity-warning-button vue-inactivity-warning-button-primary"
+          @click="onExtendSession"
         >
           {{ extendButtonText }}
         </button>
         <button 
-          @click="onLogoutNow" 
           class="vue-inactivity-warning-button vue-inactivity-warning-button-secondary"
+          @click="onLogoutNow"
         >
           {{ logoutButtonText }}
         </button>
