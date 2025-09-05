@@ -1,4 +1,4 @@
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onUnmounted } from 'vue'
 
 /**
  * Composable para manejar el cierre automático de sesión por inactividad
