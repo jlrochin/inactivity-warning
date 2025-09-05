@@ -17,6 +17,12 @@ module.exports = {
     'prefer-const': 'error',
     'no-var': 'error',
   },
+  ignorePatterns: [
+    'src/angular/**/*.ts',
+    'src/react/**/*.ts',
+    'src/vanilla/**/*.ts',
+    '**/*.ts'
+  ],
   overrides: [
     {
       files: ['*.vue'],

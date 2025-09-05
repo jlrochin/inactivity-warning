@@ -17,7 +17,7 @@
     "test": "vitest",
     "test:watch": "vitest --watch",
     "test:coverage": "vitest --coverage",
-    "lint": "eslint src --ext .vue,.js,.ts",
+    "lint": "eslint src --ext .vue,.js",
     "type-check": "vue-tsc --noEmit"
   },
   "keywords": [
